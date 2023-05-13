@@ -3,12 +3,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   fetch('./resources/pages.json').then(responce => responce.json())
     .then(function (lessons) {
-      console.log(lessons)
-
       const pagesList = document.getElementById('pages').querySelector('ul')
       const lessonTemplate = pagesList.querySelector('#page-template')
-
-      console.log(lessonTemplate)
 
       let temp
       let tempList
