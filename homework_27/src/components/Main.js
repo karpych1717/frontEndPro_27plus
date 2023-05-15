@@ -23,7 +23,7 @@ class Main extends React.Component {
 }
 
 function random255 () {
-  return Math.trunc(256 * Math.random())
+  return 100 + Math.trunc(156 * Math.random())
 }
 
 function randomColorRect (x, y, ctx) {
