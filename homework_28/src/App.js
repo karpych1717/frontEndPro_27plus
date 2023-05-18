@@ -59,13 +59,21 @@ class App extends React.Component {
       <div className='App'>
         <div className='votes'>
           {smiles.map((smile, index) => (
-            <Smile key={index} face={smile.face} onClick={() => this.handleVote(index)} />
+            <Smile
+              className='smile smallSmile activeSmile'
+              key={index}
+              face={smile.face}
+              onClick={() => this.handleVote(index)}
+            />
           ))}
         </div>
 
         {this.state.championIndex === null
           ? <button onClick={() => this.finaliseVote()}>Your champion</button>
-          : <Smile face={smiles[this.state.championIndex].face} />}
+          : <Smile
+              className='smile bigSmile'
+              face={smiles[this.state.championIndex].face}
+            />}
       </div>
     )
   }

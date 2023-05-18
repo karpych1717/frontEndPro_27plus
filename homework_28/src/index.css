@@ -12,9 +12,27 @@ code {
     monospace;
 }
 
+.smile {
+  user-select: none;
+  border-radius: 30%;
+}
+
 .smallSmile {
   font-size: 4em;
-  user-select: none;
+}
+
+.bigSmile {
+  font-size: 6em;
+  background-color: yellow;
+}
+
+.activeSmile:hover {
+  background-color: gray;
+}
+
+.activeSmile:active {
+  font-size: 4em;
+  background-color: lime;
 }
 
 .App {

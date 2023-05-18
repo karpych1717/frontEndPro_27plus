@@ -5,7 +5,12 @@ class Smile extends React.Component {
     const { face } = this.props
 
     return (
-      <span className='smallSmile' onClick={this.props.onClick}> {face} </span>
+      <span
+        className={this.props.className}
+        onClick={this.props.onClick}
+      >
+        {face}
+      </span>
     )
   }
 }
