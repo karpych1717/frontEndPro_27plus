@@ -32,21 +32,24 @@ class App extends React.Component {
   }
 
   finaliseVote () {
-    this.setState(prevState => {
-      const { smiles } = prevState
+    const { smiles } = this.state
 
-      let maxVote = 0
-      let championIndex = 0
+    let maxVote = 0
+    let championIndex = 0
 
-      smiles.forEach((smile, index) => {
-        if (smile.votes > maxVote) {
-          maxVote = smile.votes
-          championIndex = index
-        }
-      })
-
-      return { championIndex }
+    smiles.forEach((smile, index) => {
+      if (smile.votes > maxVote) {
+        maxVote = smile.votes
+        championIndex = index
+      }
     })
+
+    if (maxVote === 0) {
+      window.alert('vote please')
+      return
+    }
+
+    this.setState({ championIndex })
   }
 
   render () {
@@ -62,8 +65,7 @@ class App extends React.Component {
 
         {this.state.championIndex === null
           ? <button onClick={() => this.finaliseVote()}>Your champion</button>
-          : <Smile face={smiles[this.state.championIndex].face} />
-        }
+          : <Smile face={smiles[this.state.championIndex].face} />}
       </div>
     )
   }
