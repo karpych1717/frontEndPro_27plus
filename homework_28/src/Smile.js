@@ -2,14 +2,14 @@ import React from 'react'
 
 class Smile extends React.Component {
   render () {
-    const { face } = this.props
+    const { smile } = this.props
 
     return (
       <span
         className={this.props.className}
         onClick={this.props.onClick}
       >
-        {face}
+        {smile.face} {smile.votes}
       </span>
     )
   }

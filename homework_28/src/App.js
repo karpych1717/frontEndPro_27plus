@@ -62,7 +62,7 @@ class App extends React.Component {
             <Smile
               className='smile smallSmile activeSmile'
               key={index}
-              face={smile.face}
+              smile={smile}
               onClick={() => this.handleVote(index)}
             />
           ))}
@@ -72,7 +72,7 @@ class App extends React.Component {
           ? <button onClick={() => this.finaliseVote()}>Your champion</button>
           : <Smile
               className='smile bigSmile'
-              face={smiles[this.state.championIndex].face}
+              smile={smiles[this.state.championIndex]}
             />}
       </div>
     )
