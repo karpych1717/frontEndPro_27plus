@@ -18,7 +18,7 @@ class ToDoApp extends React.Component {
     console.log(this.state.toDoArray)
 
     return (
-      <div className='ToDoApp'>
+      <div className='toDoApp'>
         <header><h1>ToDo</h1></header>
 
         <ToDoInput
@@ -35,10 +35,7 @@ class ToDoApp extends React.Component {
   }
 
   getChachedToDoArray () {
-    return [
-      { id: 123123, task: 'ansdjk' },
-      { id: 346356, task: 'JJKKJK' }
-    ]
+    return []
   }
 
   addToDo (task) {

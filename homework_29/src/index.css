@@ -1,11 +1,80 @@
 body {
+  background-color: black;
+
   margin: 0;
 }
 
-.ToDoApp {
+.toDoApp {
+  background-color: rgb(0, 0, 60);
+  color: rgb(79, 163, 88);
+
   margin: 1em 2em;
+  padding: 1em 2em;
 }
 
-.ToDoApp>header>h1 {
+.toDoApp>header>h1 {
   font-size: 5em;
+}
+
+.toDoInput {
+  display: flex;
+  margin: 1em 0;
+}
+
+.toDoInput>button {
+  font-size: 1em;
+
+  background-color: rgb(73, 180, 145);
+
+  border: none;
+
+  padding: 0.5em;
+  margin: 0.3em;
+}
+
+.toDoInput>button:hover {
+  background-color: rgb(137, 204, 182);
+}
+
+.toDoInput>button:active {
+  background-color: rgb(0, 255, 170);
+}
+
+.toDoInput>input {
+  flex: 1;
+
+  font-size: 1em;
+
+  border: none;
+
+  padding: 0.5em;
+  margin: 0.3em;
+}
+
+.toDoItem {
+  display: flex;
+
+  background-color: rgb(0, 0, 100);
+  color: rgb(207, 255, 201);
+
+  border-radius: 0.5em;
+
+  padding: 0.5em 0.8em;
+  margin: 0.5em 1em;
+}
+
+.toDoItem>span {
+  flex: 1;
+}
+
+.toDoItem>input {
+  flex: 1;
+}
+
+.toDoItem>button {
+  margin: 0.1em;
+}
+
+.striked {
+  text-decoration: line-through;
 }
