@@ -4,7 +4,11 @@ import ToDoItem from './ToDoItem'
 class ToDoList extends React.Component {
   render () {
     return (
-      <div className='toDoList'></div>
+      <div className='toDoList'>
+        {this.props.toDoArray.map(item => {
+          return <ToDoItem key={item.id} body={item} />
+        })}
+      </div>
     )
   }
 }

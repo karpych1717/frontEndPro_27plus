@@ -15,6 +15,8 @@ class ToDoApp extends React.Component {
   }
 
   render () {
+    console.log(this.state.toDoArray)
+
     return (
       <div className='ToDoApp'>
         <header><h1>ToDo</h1></header>
@@ -33,16 +35,21 @@ class ToDoApp extends React.Component {
   }
 
   getChachedToDoArray () {
-    return []
+    return [
+      { id: 123123, task: 'ansdjk' },
+      { id: 346356, task: 'JJKKJK' }
+    ]
   }
 
   addToDo (task) {
     this.setState(prevState => {
-      const toDoArray = structuredClone(prevState.toDoArray)
-      toDoArray.push({
-        id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
-        task
-      })
+      const toDoArray = [
+        ...prevState.toDoArray,
+        {
+          id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
+          task
+        }
+      ]
 
       return { toDoArray }
     })
