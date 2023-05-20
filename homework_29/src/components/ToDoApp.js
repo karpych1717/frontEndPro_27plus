@@ -49,67 +49,62 @@ class ToDoApp extends React.Component {
   }
 
   addToDo (task) {
-    this.setState(prevState => {
-      const toDoArray = [
-        ...prevState.toDoArray,
-        {
-          id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
-          task,
-          isFinished: false
-        }
-      ]
+    const toDoArray = [
+      ...this.state.toDoArray,
+      {
+        id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
+        task,
+        isFinished: false
+      }
+    ]
 
-      this.setChachedToDoArray(toDoArray)
-      return { toDoArray }
-    })
+    this.setStateAndChache(toDoArray)
   }
 
   removeToDo (id) {
-    this.setState(prevState => {
-      const removedOne = prevState.toDoArray
-        .find(item => item.id === id)
+    const removedOne = this.state.toDoArray
+      .find(item => item.id === id)
 
-      const toDoArray = prevState.toDoArray
-        .filter(item => item !== removedOne)
+    const toDoArray = this.state.toDoArray
+      .filter(item => item !== removedOne)
 
-      this.setChachedToDoArray(toDoArray)
-      return { toDoArray }
-    })
+    this.setStateAndChache(toDoArray)
   }
 
   toggleFinished (id) {
-    this.setState(prevState => {
-      const toggledIndex = prevState.toDoArray.findIndex(item => item.id === id)
-      const toggledOne = prevState.toDoArray[toggledIndex]
+    const toggledIndex = this.state.toDoArray.findIndex(item => item.id === id)
+    const toggledOne = this.state.toDoArray[toggledIndex]
 
-      const toDoArray = [...prevState.toDoArray]
-      toDoArray[toggledIndex] = {
-        id,
-        task: toggledOne.task,
-        isFinished: !toggledOne.isFinished
-      }
+    const toDoArray = [...this.state.toDoArray]
+    toDoArray[toggledIndex] = {
+      id,
+      task: toggledOne.task,
+      isFinished: !toggledOne.isFinished
+    }
 
-      this.setChachedToDoArray(toDoArray)
-      return { toDoArray }
-    })
+    this.setStateAndChache(toDoArray)
   }
 
   saveEditToDo (id, task) {
-    this.setState(prevState => {
-      const editedIndex = prevState.toDoArray.findIndex(item => item.id === id)
-      const isFinished = prevState.toDoArray[editedIndex].isFinished
+    const editedIndex = this.state.toDoArray.findIndex(item => item.id === id)
+    const isFinished = this.state.toDoArray[editedIndex].isFinished
 
-      const toDoArray = [...prevState.toDoArray]
+    const toDoArray = [...this.state.toDoArray]
 
-      toDoArray[editedIndex] = {
-        id,
-        task,
-        isFinished
-      }
+    toDoArray[editedIndex] = {
+      id,
+      task,
+      isFinished
+    }
 
-      this.setChachedToDoArray(toDoArray)
-      return { toDoArray }
-    })
+    this.setStateAndChache(toDoArray)
+  }
+
+  setStateAndChache (toDoArray) {
+    this.setState(
+      { toDoArray },
+      () => this.setChachedToDoArray(toDoArray)
+    )
   }
 }
 

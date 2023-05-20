@@ -36,7 +36,11 @@ class ToDoItem extends React.Component {
           >
             {this.props.body.task}
           </span>
-          <input type='checkbox' onInput={this.handleToggleFinished} />
+          <input
+            type='checkbox'
+            checked={this.props.body.isFinished}
+            onChange={this.handleToggleFinished}
+          />
           <button onClick={this.handleToggleEditable}>Edit</button>
           <button onClick={this.handleRemoveToDo}>Delete</button>
         </div>
