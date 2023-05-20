@@ -10,7 +10,9 @@ class ToDoList extends React.Component {
             <ToDoItem
               key={item.id}
               body={item}
+              removeToDo={this.props.removeToDo}
               toggleFinished={this.props.toggleFinished}
+              saveEditToDo={this.props.saveEditToDo}
             />
           )
         })}

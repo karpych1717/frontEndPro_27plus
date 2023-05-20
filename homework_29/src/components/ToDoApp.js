@@ -12,7 +12,9 @@ class ToDoApp extends React.Component {
     }
 
     this.addToDo = this.addToDo.bind(this)
+    this.removeToDo = this.removeToDo.bind(this)
     this.toggleFinished = this.toggleFinished.bind(this)
+    this.saveEditToDo = this.saveEditToDo.bind(this)
   }
 
   render () {
@@ -28,9 +30,9 @@ class ToDoApp extends React.Component {
         <ToDoList
           toDoArray={this.state.toDoArray}
           toggleFinished={this.toggleFinished}
-          updateToDo={this.updateToDo}
+          saveEditToDo={this.saveEditToDo}
           completeToDo={this.completeToDo}
-          removeTodo={this.removeTodo}
+          removeToDo={this.removeToDo}
         />
       </div>
     )
@@ -55,18 +57,46 @@ class ToDoApp extends React.Component {
     })
   }
 
+  removeToDo (id) {
+    this.setState(prevState => {
+      const removedOne = prevState.toDoArray
+        .find(item => item.id === id)
+
+      const toDoArray = prevState.toDoArray
+        .filter(item => item !== removedOne)
+
+      return { toDoArray }
+    })
+  }
+
   toggleFinished (id) {
     this.setState(prevState => {
-      const toggledOne = prevState.toDoArray.find(item => item.id === id)
+      const toggledIndex = prevState.toDoArray.findIndex(item => item.id === id)
+      const toggledOne = prevState.toDoArray[toggledIndex]
 
-      const toDoArray = [
-        ...prevState.toDoArray.filter(item => item !== toggledOne),
-        {
-          id,
-          task: toggledOne.task,
-          isFinished: !toggledOne.isFinished
-        }
-      ]
+      const toDoArray = [...prevState.toDoArray]
+      toDoArray[toggledIndex] = {
+        id,
+        task: toggledOne.task,
+        isFinished: !toggledOne.isFinished
+      }
+
+      return { toDoArray }
+    })
+  }
+
+  saveEditToDo (id, task) {
+    this.setState(prevState => {
+      const editedIndex = prevState.toDoArray.findIndex(item => item.id === id)
+      const isFinished = prevState.toDoArray[editedIndex].isFinished
+
+      const toDoArray = [...prevState.toDoArray]
+
+      toDoArray[editedIndex] = {
+        id,
+        task,
+        isFinished
+      }
 
       return { toDoArray }
     })

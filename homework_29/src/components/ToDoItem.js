@@ -4,12 +4,14 @@ class ToDoItem extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      isEditable: false
-    }
+    this.state = { isEditable: false }
+
+    this.handleRemoveToDo = this.handleRemoveToDo.bind(this)
 
     this.handleToggleFinished = this.handleToggleFinished.bind(this)
     this.handleToggleEditable = this.handleToggleEditable.bind(this)
+
+    this.handleSaveEdit = this.handleSaveEdit.bind(this)
     this.handleDiscardEdit = this.handleDiscardEdit.bind(this)
   }
 
@@ -36,10 +38,14 @@ class ToDoItem extends React.Component {
           </span>
           <input type='checkbox' onInput={this.handleToggleFinished} />
           <button onClick={this.handleToggleEditable}>Edit</button>
-          <button>Delete</button>
+          <button onClick={this.handleRemoveToDo}>Delete</button>
         </div>
       )
     }
+  }
+
+  handleRemoveToDo () {
+    this.props.removeToDo(this.props.body.id)
   }
 
   handleToggleFinished () {
@@ -54,12 +60,18 @@ class ToDoItem extends React.Component {
     })
   }
 
-  handleSaveEdit () {
-    return false
+  handleSaveEdit (event) {
+    event.preventDefault()
+
+    const id = this.props.body.id
+    const newTask = event.target.elements[0].value.trim()
+
+    this.props.saveEditToDo(id, newTask)
+
+    this.handleToggleEditable()
   }
 
   handleDiscardEdit () {
-    console.log('uwu')
     this.handleToggleEditable()
   }
 }
