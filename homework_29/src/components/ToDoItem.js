@@ -5,19 +5,23 @@ class ToDoItem extends React.Component {
     super(props)
 
     this.state = {
-      isEditable: false,
-      isFinished: false
+      isEditable: false
     }
 
     this.handleToggleFinished = this.handleToggleFinished.bind(this)
-    this.handleMakeEditable = this.handleMakeEditable.bind(this)
+    this.handleToggleEditable = this.handleToggleEditable.bind(this)
+    this.handleDiscardEdit = this.handleDiscardEdit.bind(this)
   }
 
   render () {
     if (this.state.isEditable) {
       return (
-        <form className='toDoItem'>
-          <input type='text' value={this.props.body.task} />
+        <form
+          className='toDoItem'
+          onSubmit={this.handleSaveEdit}
+          onReset={this.handleDiscardEdit}
+        >
+          <input type='text' defaultValue={this.props.body.task} />
           <button type='submit'>Save</button>
           <button type='reset'>Reset</button>
         </form>
@@ -26,12 +30,12 @@ class ToDoItem extends React.Component {
       return (
         <div className='toDoItem'>
           <span
-            className={this.state.isFinished ? 'striked' : ''}
+            className={this.props.body.isFinished ? 'striked' : ''}
           >
             {this.props.body.task}
           </span>
           <input type='checkbox' onInput={this.handleToggleFinished} />
-          <button onClick={this.handleMakeEditable}>Edit</button>
+          <button onClick={this.handleToggleEditable}>Edit</button>
           <button>Delete</button>
         </div>
       )
@@ -39,17 +43,24 @@ class ToDoItem extends React.Component {
   }
 
   handleToggleFinished () {
-    this.setState((prevState) => {
-      const isFinished = !prevState.isFinished
+    this.props.toggleFinished(this.props.body.id)
+  }
 
-      return { isFinished }
+  handleToggleEditable () {
+    this.setState(prevState => {
+      const isEditable = !prevState.isEditable
+
+      return { isEditable }
     })
   }
 
-  handleMakeEditable () {
-    this.setState(() => {
-      return { isEditable: true }
-    })
+  handleSaveEdit () {
+    return false
+  }
+
+  handleDiscardEdit () {
+    console.log('uwu')
+    this.handleToggleEditable()
   }
 }
 

@@ -67,7 +67,7 @@ body {
   flex: 1;
 }
 
-.toDoItem>input {
+.toDoItem>input[type='text'] {
   flex: 1;
 }
 

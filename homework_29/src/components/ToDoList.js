@@ -6,7 +6,13 @@ class ToDoList extends React.Component {
     return (
       <div className='toDoList'>
         {this.props.toDoArray.map(item => {
-          return <ToDoItem key={item.id} body={item} />
+          return (
+            <ToDoItem
+              key={item.id}
+              body={item}
+              toggleFinished={this.props.toggleFinished}
+            />
+          )
         })}
       </div>
     )

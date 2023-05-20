@@ -12,6 +12,7 @@ class ToDoApp extends React.Component {
     }
 
     this.addToDo = this.addToDo.bind(this)
+    this.toggleFinished = this.toggleFinished.bind(this)
   }
 
   render () {
@@ -26,6 +27,7 @@ class ToDoApp extends React.Component {
         />
         <ToDoList
           toDoArray={this.state.toDoArray}
+          toggleFinished={this.toggleFinished}
           updateToDo={this.updateToDo}
           completeToDo={this.completeToDo}
           removeTodo={this.removeTodo}
@@ -44,7 +46,25 @@ class ToDoApp extends React.Component {
         ...prevState.toDoArray,
         {
           id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
-          task
+          task,
+          isFinished: false
+        }
+      ]
+
+      return { toDoArray }
+    })
+  }
+
+  toggleFinished (id) {
+    this.setState(prevState => {
+      const toggledOne = prevState.toDoArray.find(item => item.id === id)
+
+      const toDoArray = [
+        ...prevState.toDoArray.filter(item => item !== toggledOne),
+        {
+          id,
+          task: toggledOne.task,
+          isFinished: !toggledOne.isFinished
         }
       ]
 
