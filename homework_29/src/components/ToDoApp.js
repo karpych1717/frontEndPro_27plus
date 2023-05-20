@@ -18,8 +18,6 @@ class ToDoApp extends React.Component {
   }
 
   render () {
-    console.log(this.state.toDoArray)
-
     return (
       <div className='toDoApp'>
         <header><h1>ToDo</h1></header>
@@ -39,7 +37,15 @@ class ToDoApp extends React.Component {
   }
 
   getChachedToDoArray () {
-    return []
+    const toDoArray = JSON.parse(
+      window.localStorage.getItem('ToDos')
+    )
+
+    return toDoArray || []
+  }
+
+  setChachedToDoArray (toDoArray) {
+    window.localStorage.setItem('ToDos', JSON.stringify(toDoArray))
   }
 
   addToDo (task) {
@@ -53,6 +59,7 @@ class ToDoApp extends React.Component {
         }
       ]
 
+      this.setChachedToDoArray(toDoArray)
       return { toDoArray }
     })
   }
@@ -65,6 +72,7 @@ class ToDoApp extends React.Component {
       const toDoArray = prevState.toDoArray
         .filter(item => item !== removedOne)
 
+      this.setChachedToDoArray(toDoArray)
       return { toDoArray }
     })
   }
@@ -81,6 +89,7 @@ class ToDoApp extends React.Component {
         isFinished: !toggledOne.isFinished
       }
 
+      this.setChachedToDoArray(toDoArray)
       return { toDoArray }
     })
   }
@@ -98,6 +107,7 @@ class ToDoApp extends React.Component {
         isFinished
       }
 
+      this.setChachedToDoArray(toDoArray)
       return { toDoArray }
     })
   }
