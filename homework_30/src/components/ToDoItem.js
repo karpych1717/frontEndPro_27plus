@@ -1,82 +1,62 @@
-import React from 'react'
+import { useState } from 'react'
 
-class ToDoItem extends React.Component {
-  constructor (props) {
-    super(props)
+function ToDoItem (props) {
+  const [isEditable, setEditable] = useState(false)
 
-    this.state = { isEditable: false }
-
-    this.handleRemoveToDo = this.handleRemoveToDo.bind(this)
-
-    this.handleToggleFinished = this.handleToggleFinished.bind(this)
-    this.handleToggleEditable = this.handleToggleEditable.bind(this)
-
-    this.handleSaveEdit = this.handleSaveEdit.bind(this)
-    this.handleDiscardEdit = this.handleDiscardEdit.bind(this)
-  }
-
-  render () {
-    if (this.state.isEditable) {
-      return (
-        <form
-          className='toDoItem'
-          onSubmit={this.handleSaveEdit}
-          onReset={this.handleDiscardEdit}
+  return isEditable
+    ? (
+      <form
+        className='toDoItem'
+        onSubmit={handleSaveEdit}
+        onReset={handleDiscardEdit}
+      >
+        <input type='text' defaultValue={props.body.task} />
+        <button type='submit'>Save</button>
+        <button type='reset'>Reset</button>
+      </form>
+      )
+    : (
+      <div className='toDoItem'>
+        <span
+          className={props.body.isFinished ? 'striked' : ''}
         >
-          <input type='text' defaultValue={this.props.body.task} />
-          <button type='submit'>Save</button>
-          <button type='reset'>Reset</button>
-        </form>
+          {props.body.task}
+        </span>
+        <input
+          type='checkbox'
+          checked={props.body.isFinished}
+          onChange={handleToggleFinished}
+        />
+        <button onClick={handleToggleEditable}>Edit</button>
+        <button onClick={handleRemoveToDo}>Delete</button>
+      </div>
       )
-    } else {
-      return (
-        <div className='toDoItem'>
-          <span
-            className={this.props.body.isFinished ? 'striked' : ''}
-          >
-            {this.props.body.task}
-          </span>
-          <input
-            type='checkbox'
-            checked={this.props.body.isFinished}
-            onChange={this.handleToggleFinished}
-          />
-          <button onClick={this.handleToggleEditable}>Edit</button>
-          <button onClick={this.handleRemoveToDo}>Delete</button>
-        </div>
-      )
-    }
+
+  function handleRemoveToDo () {
+    props.removeToDo(props.body.id)
   }
 
-  handleRemoveToDo () {
-    this.props.removeToDo(this.props.body.id)
+  function handleToggleFinished () {
+    props.toggleFinished(props.body.id)
   }
 
-  handleToggleFinished () {
-    this.props.toggleFinished(this.props.body.id)
+  function handleToggleEditable () {
+    setEditable(!isEditable)
   }
 
-  handleToggleEditable () {
-    this.setState(prevState => {
-      const isEditable = !prevState.isEditable
-
-      return { isEditable }
-    })
-  }
-
-  handleSaveEdit (event) {
+  function handleSaveEdit (event) {
     event.preventDefault()
 
-    const id = this.props.body.id
+    const id = props.body.id
     const newTask = event.target.elements[0].value.trim()
 
-    this.props.saveEditToDo(id, newTask)
+    props.saveEditToDo(id, newTask)
 
-    this.handleToggleEditable()
+    handleToggleEditable()
   }
 
-  handleDiscardEdit () {
-    this.handleToggleEditable()
+  function handleDiscardEdit () {
+    handleToggleEditable()
   }
 }
 

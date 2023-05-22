@@ -1,42 +1,28 @@
-import React from 'react'
+import { useState } from 'react'
 
 import ToDoInput from './ToDoInput'
 import ToDoList from './ToDoList'
 
-class ToDoApp extends React.Component {
-  constructor (props) {
-    super(props)
+function ToDoApp (props) {
+  const [toDoArray, setToDoArray] = useState(getChachedToDoArray())
 
-    this.state = {
-      toDoArray: this.getChachedToDoArray()
-    }
+  return (
+    <div className='toDoApp'>
+      <header><h1>ToDo</h1></header>
 
-    this.addToDo = this.addToDo.bind(this)
-    this.removeToDo = this.removeToDo.bind(this)
-    this.toggleFinished = this.toggleFinished.bind(this)
-    this.saveEditToDo = this.saveEditToDo.bind(this)
-  }
+      <ToDoInput
+        addToDo={addToDo}
+      />
+      <ToDoList
+        toDoArray={toDoArray}
+        toggleFinished={toggleFinished}
+        saveEditToDo={saveEditToDo}
+        removeToDo={removeToDo}
+      />
+    </div>
+  )
 
-  render () {
-    return (
-      <div className='toDoApp'>
-        <header><h1>ToDo</h1></header>
-
-        <ToDoInput
-          addToDo={this.addToDo}
-        />
-        <ToDoList
-          toDoArray={this.state.toDoArray}
-          toggleFinished={this.toggleFinished}
-          saveEditToDo={this.saveEditToDo}
-          completeToDo={this.completeToDo}
-          removeToDo={this.removeToDo}
-        />
-      </div>
-    )
-  }
-
-  getChachedToDoArray () {
+  function getChachedToDoArray () {
     const toDoArray = JSON.parse(
       window.localStorage.getItem('ToDos')
     )
@@ -44,13 +30,13 @@ class ToDoApp extends React.Component {
     return toDoArray || []
   }
 
-  setChachedToDoArray (toDoArray) {
+  function setChachedToDoArray (toDoArray) {
     window.localStorage.setItem('ToDos', JSON.stringify(toDoArray))
   }
 
-  addToDo (task) {
-    const toDoArray = [
-      ...this.state.toDoArray,
+  function addToDo (task) {
+    const newToDoArray = [
+      ...toDoArray,
       {
         id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
         task,
@@ -58,53 +44,50 @@ class ToDoApp extends React.Component {
       }
     ]
 
-    this.setStateAndChache(toDoArray)
+    setToDoArray(newToDoArray)
+    setChachedToDoArray(newToDoArray)
   }
 
-  removeToDo (id) {
-    const removedOne = this.state.toDoArray
+  function removeToDo (id) {
+    const removedOne = toDoArray
       .find(item => item.id === id)
 
-    const toDoArray = this.state.toDoArray
+    const newToDoArray = toDoArray
       .filter(item => item !== removedOne)
 
-    this.setStateAndChache(toDoArray)
+    setToDoArray(newToDoArray)
+    setChachedToDoArray(newToDoArray)
   }
 
-  toggleFinished (id) {
-    const toggledIndex = this.state.toDoArray.findIndex(item => item.id === id)
-    const toggledOne = this.state.toDoArray[toggledIndex]
+  function toggleFinished (id) {
+    const toggledIndex = toDoArray.findIndex(item => item.id === id)
+    const toggledOne = toDoArray[toggledIndex]
 
-    const toDoArray = [...this.state.toDoArray]
-    toDoArray[toggledIndex] = {
+    const newToDoArray = [...toDoArray]
+    newToDoArray[toggledIndex] = {
       id,
       task: toggledOne.task,
       isFinished: !toggledOne.isFinished
     }
 
-    this.setStateAndChache(toDoArray)
+    setToDoArray(newToDoArray)
+    setChachedToDoArray(newToDoArray)
   }
 
-  saveEditToDo (id, task) {
-    const editedIndex = this.state.toDoArray.findIndex(item => item.id === id)
-    const isFinished = this.state.toDoArray[editedIndex].isFinished
+  function saveEditToDo (id, task) {
+    const editedIndex = toDoArray.findIndex(item => item.id === id)
+    const isFinished = toDoArray[editedIndex].isFinished
 
-    const toDoArray = [...this.state.toDoArray]
+    const newToDoArray = [...toDoArray]
 
-    toDoArray[editedIndex] = {
+    newToDoArray[editedIndex] = {
       id,
       task,
       isFinished
     }
 
-    this.setStateAndChache(toDoArray)
-  }
-
-  setStateAndChache (toDoArray) {
-    this.setState(
-      { toDoArray },
-      () => this.setChachedToDoArray(toDoArray)
-    )
+    setToDoArray(newToDoArray)
+    setChachedToDoArray(newToDoArray)
   }
 }
 

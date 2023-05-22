@@ -1,24 +1,22 @@
-import React from 'react'
 import ToDoItem from './ToDoItem'
 
-class ToDoList extends React.Component {
-  render () {
-    return (
-      <div className='toDoList'>
-        {this.props.toDoArray.map(item => {
+function ToDoList (props) {
+  return (
+    <div className='toDoList'>
+      {props.toDoArray
+        .map(item => {
           return (
             <ToDoItem
               key={item.id}
               body={item}
-              removeToDo={this.props.removeToDo}
-              toggleFinished={this.props.toggleFinished}
-              saveEditToDo={this.props.saveEditToDo}
+              removeToDo={props.removeToDo}
+              toggleFinished={props.toggleFinished}
+              saveEditToDo={props.saveEditToDo}
             />
           )
         })}
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ToDoList
