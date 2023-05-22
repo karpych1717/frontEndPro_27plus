@@ -29,7 +29,6 @@ class ToDoApp extends React.Component {
           toDoArray={this.state.toDoArray}
           toggleFinished={this.toggleFinished}
           saveEditToDo={this.saveEditToDo}
-          completeToDo={this.completeToDo}
           removeToDo={this.removeToDo}
         />
       </div>
