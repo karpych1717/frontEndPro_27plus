@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import './index.css'
-import ToDoApp from './components/ToDoApp'
+import PageRouter from './PageRouter'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <ToDoApp />
+    <PageRouter />
   </React.StrictMode>
 )
