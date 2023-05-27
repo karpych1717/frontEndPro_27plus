@@ -8,8 +8,6 @@ function ToDoApp (props) {
 
   return (
     <div className='toDoApp'>
-      <header><h1>ToDo</h1></header>
-
       <ToDoInput
         addToDo={addToDo}
       />
