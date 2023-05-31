@@ -1,23 +1,43 @@
+import { useState } from 'react'
+
 function ToDoInput (props) {
+  const [task, setTask] = useState('')
+
   return (
     <form
       className='toDoInput'
-      onSubmit={handleAddToDo}
+      onSubmit={handleSubmit}
+      onReset={handleReset}
     >
-      <input type='text' placeholder='task' required />
-      <button type='submit'>Add</button>
+      <input
+        type='text'
+        placeholder='task'
+        value={task}
+        onChange={handleTaskChange}
+        required
+      />
+      <button type='submit' disabled={task.length === 0}>Add</button>
       <button type='reset'>Reset</button>
     </form>
   )
 
-  function handleAddToDo (event) {
+  function handleTaskChange (event) {
+    const _task = event.target.value
+
+    setTask(_task.trim())
+  }
+
+  function handleSubmit (event) {
     event.preventDefault()
+    console.log('submit')
 
-    const _input = event.target.elements[0]
-    const newTask = _input.value.trim()
-    _input.value = ''
+    props.addToDo(task.trim())
 
-    props.addToDo(newTask)
+    event.target.reset()
+  }
+
+  function handleReset (event) {
+    setTask('')
   }
 }
 

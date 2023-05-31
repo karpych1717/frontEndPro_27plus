@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 function ToDoItem (props) {
   const [isEditable, setEditable] = useState(false)
+  const [task, setTask] = useState(props.body.task)
 
   return isEditable
     ? (
@@ -10,7 +11,11 @@ function ToDoItem (props) {
         onSubmit={handleSaveEdit}
         onReset={handleDiscardEdit}
       >
-        <input type='text' defaultValue={props.body.task} />
+        <input
+          type='text'
+          value={task}
+          onChange={handleTaskChange}
+        />
         <button type='submit'>Save</button>
         <button type='reset'>Reset</button>
       </form>
@@ -32,6 +37,12 @@ function ToDoItem (props) {
       </div>
       )
 
+  function handleTaskChange (event) {
+    const _task = event.target.value
+
+    setTask(_task.trim())
+  }
+
   function handleRemoveToDo () {
     props.removeToDo(props.body.id)
   }
@@ -40,23 +51,22 @@ function ToDoItem (props) {
     props.toggleFinished(props.body.id)
   }
 
-  function handleToggleEditable () {
-    setEditable(!isEditable)
-  }
-
   function handleSaveEdit (event) {
     event.preventDefault()
 
     const id = props.body.id
-    const newTask = event.target.elements[0].value.trim()
 
-    props.saveEditToDo(id, newTask)
+    props.saveEditToDo(id, task.trim())
 
     handleToggleEditable()
   }
 
   function handleDiscardEdit () {
     handleToggleEditable()
+  }
+
+  function handleToggleEditable () {
+    setEditable(!isEditable)
   }
 }
 
