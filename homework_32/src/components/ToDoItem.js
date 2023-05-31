@@ -16,7 +16,7 @@ function ToDoItem (props) {
           value={task}
           onChange={handleTaskChange}
         />
-        <button type='submit'>Save</button>
+        <button type='submit' disabled={task === props.body.task}>Save</button>
         <button type='reset'>Reset</button>
       </form>
       )
