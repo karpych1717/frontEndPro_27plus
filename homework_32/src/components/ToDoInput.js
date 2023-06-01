@@ -23,14 +23,13 @@ function ToDoInput (props) {
 
   function handleSubmit (event) {
     event.preventDefault()
-    console.log('submit')
 
-    props.addToDo(task.trim())
+    props.addToDo(task)
 
     setTask('')
   }
 
-  function handleReset (event) {
+  function handleReset () {
     setTask('')
   }
 }
