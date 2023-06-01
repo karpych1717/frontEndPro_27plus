@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 function ToDoItem (props) {
   const [isEditable, setEditable] = useState(false)
-  const [task, setTask] = useState(props.body.task)
+  const [task, handleTaskChange] = useTask(props.body.task)
 
   return isEditable
     ? (
@@ -37,11 +37,11 @@ function ToDoItem (props) {
       </div>
       )
 
-  function handleTaskChange (event) {
-    const _task = event.target.value
+  // function handleTaskChange (event) {
+  //   const _task = event.target.value
 
-    setTask(_task.trim())
-  }
+  //   setTask(_task.trim())
+  // }
 
   function handleRemoveToDo () {
     props.removeToDo(props.body.id)
@@ -68,6 +68,16 @@ function ToDoItem (props) {
   function handleToggleEditable () {
     setEditable(!isEditable)
   }
+}
+
+function useTask (defaultTask) {
+  const [task, setTask] = useState(defaultTask)
+
+  function handleChange (event) {
+    setTask(event.target.value.trim())
+  }
+
+  return [task, handleChange]
 }
 
 export default ToDoItem

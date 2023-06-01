@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 function ToDoInput (props) {
-  const [task, setTask] = useState('')
+  const [task, setTask, handleNewTaskChange] = useNewTask('')
 
   return (
     <form
@@ -13,19 +13,13 @@ function ToDoInput (props) {
         type='text'
         placeholder='task'
         value={task}
-        onChange={handleTaskChange}
+        onChange={handleNewTaskChange}
         required
       />
       <button type='submit' disabled={task.length === 0}>Add</button>
-      <button type='reset'>Reset</button>
+      <button type='reset' disabled={task.length === 0}>Reset</button>
     </form>
   )
-
-  function handleTaskChange (event) {
-    const _task = event.target.value
-
-    setTask(_task.trim())
-  }
 
   function handleSubmit (event) {
     event.preventDefault()
@@ -33,12 +27,22 @@ function ToDoInput (props) {
 
     props.addToDo(task.trim())
 
-    event.target.reset()
+    setTask('')
   }
 
   function handleReset (event) {
     setTask('')
   }
+}
+
+function useNewTask (defaultValue) {
+  const [task, setTask] = useState(defaultValue)
+
+  function handleNewTaskChange (event) {
+    setTask(event.target.value.trim())
+  }
+
+  return [task, setTask, handleNewTaskChange]
 }
 
 export default ToDoInput
