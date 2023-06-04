@@ -20,7 +20,7 @@ function ToDoInput (props) {
             validate={length}
             className={
               `${classes.mainInput} ${
-                !form.getState().valid && form.getState().values.input
+                form.getState().errors.input === 'to short'
                 ? [classes.invalidField]
                 : ''
               }`
@@ -41,10 +41,10 @@ function ToDoInput (props) {
 }
 
 function length (value) {
-  if (value === undefined) return 'to short'
+  if (value === undefined) return 'no input'
+  if (value.trim().length < 5) return 'to short'
 
-  console.log(value.length)
-  return value.length < 5 ? 'to short' : undefined
+  return undefined
 }
 
 export default ToDoInput
