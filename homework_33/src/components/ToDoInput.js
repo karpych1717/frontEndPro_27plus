@@ -1,12 +1,15 @@
 import { Form, Field } from 'react-final-form'
+import useStyles from '../styles.jss.js'
 
 function ToDoInput (props) {
+  const classes = useStyles(props)
+
   return (
     <Form
       onSubmit={handleSubmit}
       render={({ handleSubmit, form }) => (
         <form
-          className='toDoInput'
+          className={classes.toDoForm}
           onSubmit={handleSubmit}
         >
           <Field
@@ -15,10 +18,16 @@ function ToDoInput (props) {
             type='text'
             placeholder='task'
             validate={length}
-            className={!form.getState().valid && form.getState().values.input ? 'invalid-field' : ''}
+            className={
+              `${classes.mainInput} ${
+                !form.getState().valid && form.getState().values.input
+                ? [classes.invalidField]
+                : ''
+              }`
+            }
           />
-          <button type='submit' disabled={!form.getState().valid}>Add</button>
-          <button type='reset' onClick={() => form.reset()}>Reset</button>
+          <button type='submit' className={classes.inputButton} disabled={!form.getState().valid}>Add</button>
+          <button type='reset' className={classes.inputButton} onClick={() => form.reset()}>Reset</button>
         </form>
 
       )}

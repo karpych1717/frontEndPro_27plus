@@ -3,12 +3,15 @@ import { useState } from 'react'
 import ToDoInput from './ToDoInput'
 import ToDoList from './ToDoList'
 
+import useStyles from '../styles.jss.js'
+
 function ToDoApp (props) {
+  const classes = useStyles(props)
   const [toDoArray, setToDoArray] = useState(getChachedToDoArray())
 
   return (
-    <div className='toDoApp'>
-      <header><h1>ToDo</h1></header>
+    <div className={classes.toDoApp}>
+      <header><h1 className={classes.mainHeader}>ToDo</h1></header>
 
       <ToDoInput
         addToDo={addToDo}
