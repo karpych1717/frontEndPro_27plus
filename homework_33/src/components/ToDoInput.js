@@ -1,47 +1,41 @@
-import { useState } from 'react'
+import { Form, Field } from 'react-final-form'
 
 function ToDoInput (props) {
-  const [task, setTask, handleNewTaskChange] = useNewTask('')
-
   return (
-    <form
-      className='toDoInput'
+    <Form
       onSubmit={handleSubmit}
-      onReset={handleReset}
-    >
-      <input
-        type='text'
-        placeholder='task'
-        value={task}
-        onChange={handleNewTaskChange}
-        required
-      />
-      <button type='submit' disabled={task.length === 0}>Add</button>
-      <button type='reset' disabled={task.length === 0}>Reset</button>
-    </form>
+      render={({ handleSubmit, form }) => (
+        <form
+          className='toDoInput'
+          onSubmit={handleSubmit}
+        >
+          <Field
+            name='input'
+            component='input'
+            type='text'
+            placeholder='task'
+            validate={length}
+            className={!form.getState().valid && form.getState().values.input ? 'invalid-field' : ''}
+          />
+          <button type='submit' disabled={!form.getState().valid}>Add</button>
+          <button type='reset' onClick={() => form.reset()}>Reset</button>
+        </form>
+
+      )}
+    />
   )
 
-  function handleSubmit (event) {
-    event.preventDefault()
-
-    props.addToDo(task)
-
-    setTask('')
-  }
-
-  function handleReset () {
-    setTask('')
+  function handleSubmit (values, form) {
+    props.addToDo(values.input)
+    form.reset()
   }
 }
 
-function useNewTask (defaultValue) {
-  const [task, setTask] = useState(defaultValue)
+function length (value) {
+  if (value === undefined) return 'to short'
 
-  function handleNewTaskChange (event) {
-    setTask(event.target.value.trim())
-  }
-
-  return [task, setTask, handleNewTaskChange]
+  console.log(value.length)
+  return value.length < 5 ? 'to short' : undefined
 }
 
 export default ToDoInput

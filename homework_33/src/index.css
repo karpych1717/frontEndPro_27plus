@@ -21,6 +21,10 @@ body {
   margin: 1em 0;
 }
 
+.invalid-field {
+  background-color: rgb(255, 74, 74);
+}
+
 .toDoInput>button {
   font-size: 1em;
 
