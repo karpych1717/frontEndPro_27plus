@@ -1,17 +1,17 @@
-import ToDoItem from '../ToDoItem/'
+import { useSelector } from 'react-redux'
+import ToDoItem from '../ToDoItem'
 
 function ToDoList (props) {
+  const toDoArray = useSelector(store => store.todos)
+
   return (
     <div className='toDoList'>
-      {props.toDoArray
+      {toDoArray
         .map(item => {
           return (
             <ToDoItem
               key={item.id}
               body={item}
-              removeToDo={props.removeToDo}
-              toggleFinished={props.toggleFinished}
-              saveEditToDo={props.saveEditToDo}
             />
           )
         })}

@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { counterSlice } from '../store'
 
+import styles from './styles.module.css'
+
 function CounterUI () {
   const dispatch = useDispatch()
-  const count = useSelector(store => store.value)
-  console.log(count)
+  const count = useSelector(store => store.count)
 
   function handleIncrement () {
     dispatch(counterSlice.actions.increment())
@@ -16,22 +17,10 @@ function CounterUI () {
   }
 
   return (
-    <div
-      style={{
-        color: 'white',
-        backgroundColor: 'gray',
-        maxWidth: '8rem',
-        borderRadius: '1rem',
-        padding: '1rem',
-        margin: 'auto',
-        marginTop: '30%',
-        textAlign: 'center',
-        fontSize: '5rem'
-      }}
-    >
-      <span style={{ display: 'block', margin: 'auto' }}>{count}</span>
-      <button style={{ margin: '0.3rem' }} onClick={handleIncrement}>+1</button>
-      <button style={{ margin: '0.3rem' }} onClick={handleDecrement}>-1</button>
+    <div className={styles.div}>
+      <span className={styles.span}>{count}</span>
+      <button className={styles.button} onClick={handleDecrement}>-1</button>
+      <button className={styles.button} onClick={handleIncrement}>+1</button>
     </div>
   )
 }

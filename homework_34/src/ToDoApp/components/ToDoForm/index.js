@@ -1,49 +1,38 @@
-import { Form, Field } from 'react-final-form'
+import { useDispatch } from 'react-redux'
 
 import styles from './styles.module.css'
 
-function ToDoForm (props) {
-  return (
-    <Form
-      onSubmit={handleSubmit}
-      render={({ handleSubmit, form }) => (
-        <form
-          className={styles.toDoForm}
-          onSubmit={handleSubmit}
-        >
-          <Field
-            name='input'
-            component='input'
-            type='text'
-            placeholder='task'
-            validate={length}
-            className={
-              `${styles.mainInput} ${
-                form.getState().errors.input === 'to short'
-                ? [styles.invalidField]
-                : ''
-              }`
-            }
-          />
-          <button type='submit' disabled={!form.getState().valid}>Add</button>
-          <button type='reset' onClick={() => form.reset()}>Reset</button>
-        </form>
+import { todoSlice } from '../../store'
 
-      )}
-    />
-  )
+function ToDoForm () {
+  console.log(todoSlice)
+  const dispatch = useDispatch()
 
-  function handleSubmit (values, form) {
-    props.addToDo(values.input)
-    form.reset()
+  function handleSubmit (event) {
+    event.preventDefault()
+
+    const task = event.target[0].value
+
+    if (!task) return
+
+    dispatch(todoSlice.actions.addToDo(task))
+
+    event.target[0].value = ''
   }
-}
-
-function length (value) {
-  if (value === undefined) return 'no input'
-  if (value.trim().length < 5) return 'to short'
-
-  return undefined
+  return (
+    <form
+      className={styles.toDoForm}
+      onSubmit={handleSubmit}
+    >
+      <input
+        type='text'
+        placeholder='task'
+        className={styles.mainInput}
+      />
+      <button type='submit'>Add</button>
+      <button type='reset'>Reset</button>
+    </form>
+  )
 }
 
 export default ToDoForm

@@ -1,15 +1,14 @@
-
 import { Provider } from 'react-redux'
 
-import CounterUI from './CounterUI'
+import ToDoUI from './components/ToDoUI'
 import { store } from './store'
 
-function Counter () {
+function ToDoApp (props) {
   return (
     <Provider store={store}>
-      <CounterUI />
+      <ToDoUI />
     </Provider>
   )
 }
 
-export default Counter
+export default ToDoApp
