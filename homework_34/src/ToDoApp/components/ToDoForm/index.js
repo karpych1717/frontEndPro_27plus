@@ -1,15 +1,14 @@
 import { Form, Field } from 'react-final-form'
-import useStyles from '../styles.jss.js'
 
-function ToDoInput (props) {
-  const classes = useStyles(props)
+import styles from './styles.module.css'
 
+function ToDoForm (props) {
   return (
     <Form
       onSubmit={handleSubmit}
       render={({ handleSubmit, form }) => (
         <form
-          className={classes.toDoForm}
+          className={styles.toDoForm}
           onSubmit={handleSubmit}
         >
           <Field
@@ -19,15 +18,15 @@ function ToDoInput (props) {
             placeholder='task'
             validate={length}
             className={
-              `${classes.mainInput} ${
+              `${styles.mainInput} ${
                 form.getState().errors.input === 'to short'
-                ? [classes.invalidField]
+                ? [styles.invalidField]
                 : ''
               }`
             }
           />
-          <button type='submit' className={classes.inputButton} disabled={!form.getState().valid}>Add</button>
-          <button type='reset' className={classes.inputButton} onClick={() => form.reset()}>Reset</button>
+          <button type='submit' disabled={!form.getState().valid}>Add</button>
+          <button type='reset' onClick={() => form.reset()}>Reset</button>
         </form>
 
       )}
@@ -47,4 +46,4 @@ function length (value) {
   return undefined
 }
 
-export default ToDoInput
+export default ToDoForm

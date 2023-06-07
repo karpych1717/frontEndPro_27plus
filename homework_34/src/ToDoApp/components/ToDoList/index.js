@@ -1,4 +1,4 @@
-import ToDoItem from './ToDoItem'
+import ToDoItem from '../ToDoItem/'
 
 function ToDoList (props) {
   return (

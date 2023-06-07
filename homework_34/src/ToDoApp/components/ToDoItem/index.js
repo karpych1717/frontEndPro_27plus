@@ -1,49 +1,48 @@
 import { useState } from 'react'
-import useStyles from '../styles.jss.js'
+
+import styles from './styles.module.css'
 
 function ToDoItem (props) {
-  const classes = useStyles(props)
-
   const [isEditable, setEditable] = useState(false)
   const [task, handleTaskChange] = useTask(props.body.task)
 
   return isEditable
     ? (
       <form
-        className={classes.toDoItem}
+        className={styles.toDoItem}
         onSubmit={handleSaveEdit}
         onReset={handleDiscardEdit}
       >
         <input
-          className={classes.textInput}
+          className={styles.textInput}
           type='text'
           value={task}
           onChange={handleTaskChange}
         />
-        <button className={classes.itemButton} type='submit' disabled={task.trim() === props.body.task}>Save</button>
-        <button className={classes.itemButton} type='reset'>Reset</button>
+        <button className={styles.itemButton} type='submit' disabled={task.trim() === props.body.task}>Save</button>
+        <button className={styles.itemButton} type='reset'>Reset</button>
       </form>
       )
     : (
-      <div className={classes.toDoItem}>
+      <div className={styles.toDoItem}>
+        <input
+          type='checkbox'
+          checked={props.body.isFinished}
+          onChange={handleToggleFinished}
+        />
         <span
           className={
-            `${classes.itemSpan} ${
+            `${styles.itemSpan} ${
               props.body.isFinished
-                ? classes.striked
+                ? styles.striked
                 : ''
             }`
         }
         >
           {props.body.task}
         </span>
-        <input
-          type='checkbox'
-          checked={props.body.isFinished}
-          onChange={handleToggleFinished}
-        />
-        <button className={classes.itemButton} onClick={handleToggleEditable}>Edit</button>
-        <button className={classes.itemButton} onClick={handleRemoveToDo}>Delete</button>
+        <button onClick={handleToggleEditable}>Edit</button>
+        <button onClick={handleRemoveToDo}>Delete</button>
       </div>
       )
 

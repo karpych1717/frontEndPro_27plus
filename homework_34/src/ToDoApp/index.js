@@ -1,19 +1,18 @@
 import { useState } from 'react'
 
-import ToDoInput from './ToDoInput'
-import ToDoList from './ToDoList'
+import ToDoForm from './components/ToDoForm/'
+import ToDoList from './components/ToDoList/'
 
-import useStyles from '../styles.jss.js'
+import styles from './styles.module.css'
 
 function ToDoApp (props) {
-  const classes = useStyles(props)
   const [toDoArray, setToDoArray] = useState(getChachedToDoArray())
 
   return (
-    <div className={classes.toDoApp}>
-      <header><h1 className={classes.mainHeader}>ToDo</h1></header>
+    <div className={styles.toDoApp}>
+      <header><h1>ToDo</h1></header>
 
-      <ToDoInput
+      <ToDoForm
         addToDo={addToDo}
       />
       <ToDoList
