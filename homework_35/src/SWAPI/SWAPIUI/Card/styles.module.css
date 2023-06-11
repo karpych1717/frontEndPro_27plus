@@ -1,0 +1,19 @@
+.meta {
+  display:block;
+  
+  margin-bottom: 1rem;
+}
+
+.code {
+  display: block;
+  font-family: monospace;
+
+  white-space: pre;
+}
+
+.responceContainer {
+  border: 1px solid white;
+
+  margin: 1rem;
+  padding: 1rem;
+}

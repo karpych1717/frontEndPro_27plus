@@ -1,0 +1,14 @@
+.swapi_form {
+  display: flex;
+}
+
+.swapi_label {
+  display: flex;
+  flex: 1;
+}
+
+.swapi_input {
+  flex: 1;
+
+  font-size: 1rem;
+}

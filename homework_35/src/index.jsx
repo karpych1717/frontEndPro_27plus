@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './styles.css'
 import Greeting from './Greeting'
 import ToDoApp from './ToDoApp'
-import Counter from './Counter'
+import SWAPI from './SWAPI'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -13,7 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Greeting />} />
-        <Route path='/counter' element={<Counter />} />
+        <Route path='/swapi' element={<SWAPI />} />
         <Route path='/todoapp' element={<ToDoApp />} />
       </Routes>
     </BrowserRouter>

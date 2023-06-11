@@ -2,16 +2,16 @@
 import { Provider } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import CounterUI from './CounterUI'
+import SWAPIUI from './SWAPIUI'
 import { store } from './store'
 
-function Counter () {
+function SWAPI () {
   return (
     <Provider store={store}>
       <Link to='/'>Back</Link>
-      <CounterUI />
+      <SWAPIUI />
     </Provider>
   )
 }
 
-export default Counter
+export default SWAPI
