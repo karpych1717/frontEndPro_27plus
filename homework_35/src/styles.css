@@ -1,0 +1,21 @@
+body {
+  background-color: black;
+
+  margin: 0;
+}
+
+nav {
+  display: block;
+  margin: auto;
+  margin-top: 6rem;
+  font-size: 6rem;
+  max-width: 35rem;
+}
+
+a {
+  display: inline-block;
+  background-color: gray;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+}
