@@ -3,6 +3,10 @@ h1, h2 {
     margin-bottom: 15px;
 }
 
+footer {
+    text-align: center;
+}
+
 .container {
     width: 100%;
     margin: 0 auto;
@@ -10,7 +14,7 @@ h1, h2 {
 }
 
 .form {
-    background: #fff;
+    background: #050066;
     padding: 10px;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -35,7 +39,7 @@ h1, h2 {
 .todo-item {
     display: flex;
     padding: 10px;
-    background: #fff;
+    background: #050066;
     border-radius: 10px;
     justify-content: space-between;
     align-items: center;
@@ -48,10 +52,34 @@ h1, h2 {
     flex-grow: 1;
     padding-left: 10px;
 }
+.todo-item__edit_form {
+    display: flex;
+    flex: 1;
+}
+.todo-item__edit_field {
+    flex: 1;
+    padding: 0.5rem;
+    padding-left: 10px;
+}
 .todo-item__delete {
-    background: #0be69d;
+    background: #e62c0b;
     border: none;
     cursor: pointer;
     width: 95px;
     padding: 10px;
+}
+.todo-item__edit {
+    background: #e6df0b;
+    border: none;
+    cursor: pointer;
+    width: 95px;
+    padding: 10px;
+
+    margin-right: 1rem;
+}
+.todo-item__check {
+    margin-left:  0.5rem;
+}
+.striked {
+    text-decoration: line-through;
 }
