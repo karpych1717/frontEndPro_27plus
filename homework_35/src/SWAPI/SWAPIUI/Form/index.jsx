@@ -14,9 +14,18 @@ function Form () {
     const request = event.target[0].value || defaultRequest
 
     fetch(new URL(`/api/${request}`, 'https://swapi.dev'), { method: 'GET' })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 'success') {
+          return response.json()
+        }
+
+        throw new Error('Something went wrong')
+      })
       .then(data => {
         dispatch(swapiSlice.actions.fill({ request, data }))
+      })
+      .catch(error => {
+        dispatch(swapiSlice.actions.fill({ request, data: error.message }))
       })
 
     event.target[0].value = ''
