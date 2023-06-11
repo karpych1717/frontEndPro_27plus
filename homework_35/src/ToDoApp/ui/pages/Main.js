@@ -1,5 +1,6 @@
 // Core
 import { Provider } from 'react-redux'
+import { Link } from 'react-router-dom'
 // Parts
 import Todo from '../containers/Todo'
 // Engine
@@ -10,6 +11,7 @@ import '../../main.css'
 function Main () {
   return (
     <Provider store={store}>
+      <Link to='/'>Back</Link>
       <Todo />
     </Provider>
   )
