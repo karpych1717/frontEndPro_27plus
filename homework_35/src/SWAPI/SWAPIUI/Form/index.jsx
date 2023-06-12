@@ -15,7 +15,7 @@ function Form () {
 
     fetch(new URL(`/api/${request}`, 'https://swapi.dev'), { method: 'GET' })
       .then(response => {
-        if (response.status === 'success') {
+        if (response.status === 200) {
           return response.json()
         }
 

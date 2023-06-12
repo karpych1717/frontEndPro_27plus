@@ -29,12 +29,8 @@ function TodoItem (props) {
     const newText = event.target[0].value
     const itemIndex = items.findIndex(item => item.id === id)
 
-    console.log(newText)
-
     const newItems = [...items]
     newItems[itemIndex] = { id, text: newText, isReady }
-
-    console.log(newItems)
 
     dispatch(todosActions.replaceItems(newItems))
     window.localStorage.setItem('items', JSON.stringify(newItems))
