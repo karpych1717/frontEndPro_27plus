@@ -42,6 +42,10 @@ function TodoItem (props) {
     handleSwitchView()
   }
 
+  const handleDiscardEdit = () => {
+    handleSwitchView()
+  }
+
   const handleToggleReady = () => {
     const itemIndex = items.findIndex(item => item.id === id)
 
@@ -62,7 +66,7 @@ function TodoItem (props) {
       />
       {isEdit
         ? (
-          <form className='todo-item__edit_form' onSubmit={handleEdit}>
+          <form className='todo-item__edit_form' onSubmit={handleEdit} onReset={handleDiscardEdit}>
             <input className='todo-item__edit_field' type='text' defaultValue={text} />
             <button type='submit'>Save</button>
             <button type='reset'>Discard</button>
