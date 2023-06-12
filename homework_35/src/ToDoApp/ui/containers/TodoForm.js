@@ -3,11 +3,11 @@ import '../../main.css'
 // Parts
 import Input from '../components/form/Input'
 import Button from '../components/form/Button'
-import { todosActions, todosSelectors } from '../../engine/core/todos/slice'
+import todosSlice from '../../../storage/todosSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 function TodoForm () {
-  const items = useSelector(todosSelectors.items)
+  const items = useSelector(state => state.todos.items)
   const dispatch = useDispatch()
 
   const handleAdd = (event) => {
@@ -19,7 +19,7 @@ function TodoForm () {
       { id: Math.random(), text, isReady: false }
     ]
 
-    dispatch(todosActions.replaceItems(newItems))
+    dispatch(todosSlice.actions.replaceItems(newItems))
     window.localStorage.setItem('items', JSON.stringify(newItems))
     input.value = ''
   }

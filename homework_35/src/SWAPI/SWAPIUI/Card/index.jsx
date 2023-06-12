@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './styles.module.css'
 
-import { swapiSlice } from '../../store'
+import swapiSlice from '../../../storage/swapiSlice'
 
 function Card (props) {
-  const responce = useSelector(store => store.body)
+  const responce = useSelector(store => store.swapi.body)
   const dispatch = useDispatch()
 
   function handleClear () {

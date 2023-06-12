@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 export default class Header extends React.Component {
-    render() {
-        return <h1>ToDoList</h1>
-    }
+  render () {
+    return <h1>ToDoList</h1>
+  }
 }

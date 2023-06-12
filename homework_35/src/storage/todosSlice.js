@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-// immutable
+
+const initialState = {
+  items: []
+}
 
 const todosSlice = createSlice({
   name: 'todos',
-  initialState: {
-    items: []
-    // items: immutable.List([])
-  },
+  initialState,
   reducers: {
     replaceItems: (state, action) => {
       state.items = action.payload
@@ -19,11 +19,4 @@ const todosSlice = createSlice({
   }
 })
 
-export const todosSelectors = {
-  items: (state) => state.todos.items, // toJS() List => []
-  length: (state) => state.todos.items.length
-}
-
-export const todosActions = todosSlice.actions
-
-export default todosSlice.reducer
+export default todosSlice

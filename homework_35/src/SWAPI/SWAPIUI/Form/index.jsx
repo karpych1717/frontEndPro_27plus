@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 
 import { useDispatch } from 'react-redux'
-import { swapiSlice } from '../../store'
+import swapiSlice from '../../../storage/swapiSlice'
 
 const defaultRequest = '/people/1/'
 

@@ -5,18 +5,19 @@ import Header from '../components/Header'
 import TodoItem from '../components/TodoItem'
 import TodoForm from './TodoForm'
 // Engine
-import { todosActions, todosSelectors } from '../../engine/core/todos/slice'
+import todosSlice from '../../../storage/todosSlice'
 import { useEffect } from 'react'
 import { Footer } from '../components/Footer'
 
 export default function Todo () {
-  const items = useSelector(todosSelectors.items)
+  // const items = useSelector(state => state.todos.items)
+  const items = useSelector(state => state.todos.items)
   const dispatch = useDispatch()
 
   useEffect(
     () => {
       const fetchItems = JSON.parse(window.localStorage.getItem('items')) || []
-      dispatch(todosActions.replaceItems(fetchItems))
+      dispatch(todosSlice.actions.replaceItems(fetchItems))
     },
     []
   )

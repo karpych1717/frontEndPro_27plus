@@ -4,17 +4,17 @@ import { useState } from 'react'
 // Parts
 import Button from './form/Button'
 // Engine
-import { todosActions, todosSelectors } from '../../engine/core/todos/slice'
+import todosSlice from '../../../storage/todosSlice'
 
 function TodoItem (props) {
   const [isEdit, setEdit] = useState(false)
 
   const { isReady, text, id } = props
-  const items = useSelector(todosSelectors.items)
+  const items = useSelector(state => state.todos.items)
   const dispatch = useDispatch()
 
   const handleDelete = () => {
-    dispatch(todosActions.removeItem(id))
+    dispatch(todosSlice.actions.removeItem(id))
     const newItems = items.filter(item => item.id !== id)
     window.localStorage.setItem('items', JSON.stringify(newItems))
   }
@@ -32,7 +32,7 @@ function TodoItem (props) {
     const newItems = [...items]
     newItems[itemIndex] = { id, text: newText, isReady }
 
-    dispatch(todosActions.replaceItems(newItems))
+    dispatch(todosSlice.actions.replaceItems(newItems))
     window.localStorage.setItem('items', JSON.stringify(newItems))
 
     handleSwitchView()
@@ -48,7 +48,7 @@ function TodoItem (props) {
     const newItems = [...items]
     newItems[itemIndex] = { id, text, isReady: !isReady }
 
-    dispatch(todosActions.replaceItems(newItems))
+    dispatch(todosSlice.actions.replaceItems(newItems))
     window.localStorage.setItem('items', JSON.stringify(newItems))
   }
 
@@ -90,4 +90,5 @@ function TodoItem (props) {
     </div>
   )
 }
+
 export default TodoItem

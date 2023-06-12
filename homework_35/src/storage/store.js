@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import swapiSlice from './swapiSlice'
-import todoSlice from './todoSlice'
+import todosSlice from './todosSlice'
 
 const combinedReducer = combineReducers({
-  swapiSlice: swapiSlice.reducer,
-  todoSlice: todoSlice.reducer
+  swapi: swapiSlice.reducer,
+  todos: todosSlice.reducer
 })
 
 const store = configureStore({
