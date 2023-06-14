@@ -4,7 +4,6 @@ const selectItemById = (id) => (state) => {
 }
 
 const selectIdArray = (state) => {
-  console.log(state.todos)
   const array = state.todos.map(item => item.id)
   return array
 }

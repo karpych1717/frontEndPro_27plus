@@ -5,7 +5,6 @@ import { selectIdArray } from '../../../storage/selectors'
 
 function ToDoList (props) {
   const idArray = useSelector(selectIdArray, shallowEqual)
-  console.log(idArray)
 
   return (
     <div className='toDoList'>
