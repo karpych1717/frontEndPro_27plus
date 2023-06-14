@@ -1,20 +1,16 @@
 import ToDoItem from '../ToDoItem/'
 
+import { shallowEqual, useSelector } from 'react-redux'
+import { getIdArray } from '../../../storage/selectors'
+
 function ToDoList (props) {
+  const idArray = useSelector(getIdArray, shallowEqual)
+  console.log(idArray)
+
   return (
     <div className='toDoList'>
-      {props.toDoArray
-        .map(item => {
-          return (
-            <ToDoItem
-              key={item.id}
-              body={item}
-              removeToDo={props.removeToDo}
-              toggleFinished={props.toggleFinished}
-              saveEditToDo={props.saveEditToDo}
-            />
-          )
-        })}
+      {idArray
+        .map(id => <ToDoItem key={id} id={id} />)}
     </div>
   )
 }

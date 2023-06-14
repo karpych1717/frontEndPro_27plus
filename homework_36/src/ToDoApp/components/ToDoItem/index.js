@@ -1,10 +1,17 @@
 import { useState } from 'react'
 
 import styles from './styles.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectItemById } from '../../../storage/selectors'
+import { editItem, removeItem } from '../../../storage/thunks'
 
 function ToDoItem (props) {
+  const taskByID = useSelector(selectItemById(props.id))
+  const [body, setBody] = useState(taskByID.body)
+
   const [isEditable, setEditable] = useState(false)
-  const [task, handleTaskChange] = useTask(props.body.task)
+
+  const dispatch = useDispatch()
 
   return isEditable
     ? (
@@ -16,10 +23,10 @@ function ToDoItem (props) {
         <input
           className={styles.textInput}
           type='text'
-          value={task}
-          onChange={handleTaskChange}
+          value={body}
+          onChange={handleBodyChange}
         />
-        <button className={styles.itemButton} type='submit' disabled={task.trim() === props.body.task}>Save</button>
+        <button className={styles.itemButton} type='submit' disabled={body.trim() === taskByID.body}>Save</button>
         <button className={styles.itemButton} type='reset'>Reset</button>
       </form>
       )
@@ -27,60 +34,61 @@ function ToDoItem (props) {
       <div className={styles.toDoItem}>
         <input
           type='checkbox'
-          checked={props.body.isFinished}
+          checked={taskByID.isFinished}
           onChange={handleToggleFinished}
         />
         <span
           className={
             `${styles.itemSpan} ${
-              props.body.isFinished
+              taskByID.isFinished
                 ? styles.striked
                 : ''
             }`
         }
         >
-          {props.body.task}
+          {taskByID.body}
         </span>
         <button onClick={handleToggleEditable}>Edit</button>
         <button onClick={handleRemoveToDo}>Delete</button>
       </div>
       )
 
-  function handleRemoveToDo () {
-    props.removeToDo(props.body.id)
-  }
-
-  function handleToggleFinished () {
-    props.toggleFinished(props.body.id)
-  }
-
   function handleSaveEdit (event) {
     event.preventDefault()
 
-    const id = props.body.id
+    const editedItem = {
+      ...taskByID,
+      body: event.target[0].value.trim()
+    }
 
-    props.saveEditToDo(id, task.trim())
+    dispatch(editItem(editedItem))
+    setEditable(!isEditable)
+  }
 
-    handleToggleEditable()
+  function handleBodyChange (event) {
+    setBody(event.target.value.trim())
+  }
+
+  function handleToggleFinished () {
+    const editedItem = {
+      ...taskByID,
+      isFinished: !taskByID.isFinished
+    }
+
+    dispatch(editItem(editedItem))
+  }
+
+  function handleToggleEditable () {
+    setEditable(!isEditable)
   }
 
   function handleDiscardEdit () {
     handleToggleEditable()
   }
 
-  function handleToggleEditable () {
-    setEditable(!isEditable)
+  function handleRemoveToDo () {
+    dispatch(removeItem(props.id))
   }
-}
-
-function useTask (defaultTask) {
-  const [task, setTask] = useState(defaultTask)
-
-  function handleChange (event) {
-    setTask(event.target.value)
-  }
-
-  return [task, handleChange]
 }
 
 export default ToDoItem

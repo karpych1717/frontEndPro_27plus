@@ -1,8 +1,12 @@
+import { useDispatch } from 'react-redux'
+import { addItem } from '../../../storage/thunks'
 import { Form, Field } from 'react-final-form'
 
 import styles from './styles.module.css'
 
 function ToDoForm (props) {
+  const dispatch = useDispatch()
+
   return (
     <Form
       onSubmit={handleSubmit}
@@ -34,7 +38,7 @@ function ToDoForm (props) {
   )
 
   function handleSubmit (values, form) {
-    props.addToDo(values.input)
+    dispatch(addItem(values.input))
     form.reset()
   }
 }
