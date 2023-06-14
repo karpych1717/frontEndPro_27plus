@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 import ToDoForm from './components/ToDoForm/'
 import ToDoList from './components/ToDoList/'
+import Footer from './components/Footer'
 
 import styles from './styles.module.css'
 import { useEffect } from 'react'
@@ -16,6 +17,7 @@ function ToDoApp (props) {
 
       <ToDoForm />
       <ToDoList />
+      <Footer />
     </div>
   )
 }

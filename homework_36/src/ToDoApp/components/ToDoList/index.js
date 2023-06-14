@@ -1,10 +1,10 @@
 import ToDoItem from '../ToDoItem/'
 
 import { shallowEqual, useSelector } from 'react-redux'
-import { getIdArray } from '../../../storage/selectors'
+import { selectIdArray } from '../../../storage/selectors'
 
 function ToDoList (props) {
-  const idArray = useSelector(getIdArray, shallowEqual)
+  const idArray = useSelector(selectIdArray, shallowEqual)
   console.log(idArray)
 
   return (
