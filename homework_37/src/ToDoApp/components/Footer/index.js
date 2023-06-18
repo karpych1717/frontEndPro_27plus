@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAmount } from '../../../storage/selectors'
-import { thunkClearAll } from '../../../storage/thunks'
 
 import styles from './styles.module.css'
 import { createAction } from '@reduxjs/toolkit'

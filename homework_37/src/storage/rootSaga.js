@@ -3,7 +3,7 @@ import { createAction } from '@reduxjs/toolkit'
 import todosSlice from './todosSlice'
 
 const todosActions = Object.freeze({
-  todosFetch: createAction('FETCH_TODOS'),
+  fetchTodos: createAction('FETCH_TODOS'),
   addItem: createAction('ADD_ITEM'),
   removeItem: createAction('REMOVE_ITEM'),
   editItem: createAction('EDIT_ITEM'),
@@ -22,7 +22,7 @@ function * fetchTodosWorker () {
   yield put(todosSlice.actions.replaceItems(response))
 }
 
-function * addItem (action) {
+function * addItemWorker (action) {
   const newItem = {
     id: Math.ceil(Number.MAX_SAFE_INTEGER * Math.random()),
     body: action.payload,
@@ -33,27 +33,27 @@ function * addItem (action) {
   yield * backUp()
 }
 
-function * removeItem (action) {
+function * removeItemWorker (action) {
   yield put(todosSlice.actions.removeItem(action.payload))
   yield * backUp()
 }
 
-function * editItem (action) {
+function * editItemWorker (action) {
   yield put(todosSlice.actions.editItem(action.payload))
   yield * backUp()
 }
 
-function * clearAll () {
+function * clearAllWorker () {
   yield put(todosSlice.actions.replaceItems([]))
   yield * backUp()
 }
 
 function * todosWatcher () {
-  yield takeEvery(todosActions.todosFetch.type, fetchTodosWorker)
-  yield takeEvery(todosActions.addItem.type, addItem)
-  yield takeEvery(todosActions.removeItem.type, removeItem)
-  yield takeEvery(todosActions.editItem.type, editItem)
-  yield takeEvery(todosActions.clearAll.type, clearAll)
+  yield takeEvery(todosActions.fetchTodos.type, fetchTodosWorker)
+  yield takeEvery(todosActions.addItem.type, addItemWorker)
+  yield takeEvery(todosActions.removeItem.type, removeItemWorker)
+  yield takeEvery(todosActions.editItem.type, editItemWorker)
+  yield takeEvery(todosActions.clearAll.type, clearAllWorker)
 }
 
 function * rootSaga () {
