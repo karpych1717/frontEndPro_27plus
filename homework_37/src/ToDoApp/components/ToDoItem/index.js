@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styles from './styles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectItemById } from '../../../storage/selectors'
-import { editItem, removeItem } from '../../../storage/thunks'
+import { createAction } from '@reduxjs/toolkit'
 
 function ToDoItem (props) {
   const taskByID = useSelector(selectItemById(props.id))
@@ -61,7 +61,7 @@ function ToDoItem (props) {
       body: event.target[0].value.trim()
     }
 
-    dispatch(editItem(editedItem))
+    dispatch(createAction('EDIT_ITEM')(editedItem))
     setEditable(!isEditable)
   }
 
@@ -75,7 +75,7 @@ function ToDoItem (props) {
       isFinished: !taskByID.isFinished
     }
 
-    dispatch(editItem(editedItem))
+    dispatch(createAction('EDIT_ITEM')(editedItem))
   }
 
   function handleToggleEditable () {
@@ -87,7 +87,7 @@ function ToDoItem (props) {
   }
 
   function handleRemoveToDo () {
-    dispatch(removeItem(props.id))
+    dispatch(createAction('REMOVE_ITEM')(props.id))
   }
 }
 

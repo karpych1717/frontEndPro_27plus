@@ -3,6 +3,7 @@ import { selectAmount } from '../../../storage/selectors'
 import { thunkClearAll } from '../../../storage/thunks'
 
 import styles from './styles.module.css'
+import { createAction } from '@reduxjs/toolkit'
 
 function Footer () {
   const amount = useSelector(selectAmount)
@@ -17,7 +18,7 @@ function Footer () {
   )
 
   function handleClearAll () {
-    dispatch(thunkClearAll)
+    dispatch(createAction('CLEAR_ALL')())
   }
 }
 

@@ -5,11 +5,14 @@ import Footer from './components/Footer'
 
 import styles from './styles.module.css'
 import { useEffect } from 'react'
-import { thunkFetch } from '../storage/thunks'
+
+import { createAction } from '@reduxjs/toolkit'
 
 function ToDoApp (props) {
   const dispatch = useDispatch()
-  useEffect(() => dispatch(thunkFetch))
+  useEffect(() => {
+    dispatch(createAction('FETCH_TODOS')())
+  })
 
   return (
     <div className={styles.toDoApp}>

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { addItem } from '../../../storage/thunks'
 import { Form, Field } from 'react-final-form'
+import { createAction } from '@reduxjs/toolkit'
 
 import styles from './styles.module.css'
 
@@ -38,7 +38,7 @@ function ToDoForm (props) {
   )
 
   function handleSubmit (values, form) {
-    dispatch(addItem(values.input))
+    dispatch(createAction('ADD_ITEM')(values.input))
     form.reset()
   }
 }
