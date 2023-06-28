@@ -13,25 +13,15 @@ function DestinationForm () {
       render={({ handleSubmit }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={1} direction='column' alignItems='center' justifyContent='center'>
-              <Grid item xs={12}>
-                <Field name='destination' component={DestinationInput} />
-              </Grid>
-              <Grid item xs={12}>
-                <Field name='checkIn' component={DatePicker} />
-              </Grid>
-              <Grid item xs={12}>
-                <Field name='checkOut' component={DatePicker} />
-              </Grid>
-              <Grid item xs={12}>
-                <Field name='adults' component={TextField} />
-              </Grid>
-              <Grid item xs={12}>
-                <Field name='children' component={TextField} />
-              </Grid>
-              <Grid item xs={12}>
-                <Button />
-              </Grid>
+            <Grid container direction='column' alignItems='center' justifyContent='center'>
+              <Field name='destination' component={DestinationInput} />
+
+              <Field name='checkIn' component={DatePicker} sx={{ width: 300, margin: '0.2rem' }} />
+              <Field name='checkOut' component={DatePicker} sx={{ width: 300, margin: '0.1rem' }} />
+
+              <Field name='adults' component={TextField} sx={{ width: 300, margin: '0.1rem' }} />
+              <Field name='children' component={TextField} sx={{ width: 300, margin: '0.1rem' }} />
+              <Button />
             </Grid>
           </form>
         </LocalizationProvider>

@@ -1,17 +1,19 @@
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
+import { Select, MenuItem } from '@mui/material'
 
 function DestinationInput () {
   return (
     <Select
-      labelId='demo-simple-select-label'
-      id='demo-simple-select'
-      value={10}
-      label='Age'
+      displayEmpty
+      value=''
       onChange={() => console.log('uwu')}
+      sx={{ width: 300, margin: '0.1rem' }}
     >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
+      <MenuItem disabled value=''>
+        <em>Destination</em>
+      </MenuItem>
+      <MenuItem value={10}>sfldgsndgsd</MenuItem>
+      <MenuItem value={20}>Twentydfgsfd</MenuItem>
+      <MenuItem value={30}>Thirtysdgsf</MenuItem>
     </Select>
   )
 }

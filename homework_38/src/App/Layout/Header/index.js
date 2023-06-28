@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom'
 
 function Header () {
   return (
-    <nav style={{ display: 'flexbox' }}>
-      <Link to='/' style={{ flex: 1 }}>Main</Link>
-      <Link to='/hotels'>Hotels</Link>
+    <nav style={{ margin: '1rem', padding: '1rem', backgroundColor: 'LightGray' }}>
+      <Link to='/' style={{ margin: '1rem' }}>Main</Link>
       <Link to='/about'>About</Link>
     </nav>
   )
