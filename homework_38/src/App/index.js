@@ -1,15 +1,22 @@
 import './index.css'
+import Layout from './Layout'
+import Main from './Main'
+import Hotels from './Hotels'
+import About from './About'
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App () {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        Learn React
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Main />} />
+          <Route path='/hotels' element={<Hotels />} />
+          <Route path='/about' element={<About />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
