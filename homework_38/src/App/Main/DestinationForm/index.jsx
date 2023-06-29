@@ -8,12 +8,12 @@ import { Grid, TextField } from '@mui/material'
 
 function DestinationForm () {
   return (
-    <Form
-      onSubmit={() => console.log('submit')}
-      render={({ handleSubmit }) => (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit, form }) => (
           <form onSubmit={handleSubmit}>
-            <Grid container direction='column' alignItems='center' justifyContent='center'>
+            {/* <Grid container direction='column' alignItems='center' justifyContent='center'> */}
               <Field name='destination' component={DestinationInput} />
 
               <Field name='checkIn' component={DatePicker} sx={{ width: 300, margin: '0.2rem' }} />
@@ -22,12 +22,18 @@ function DestinationForm () {
               <Field name='adults' component={TextField} sx={{ width: 300, margin: '0.1rem' }} />
               <Field name='children' component={TextField} sx={{ width: 300, margin: '0.1rem' }} />
               <Button />
-            </Grid>
+            {/* </Grid> */}
           </form>
-        </LocalizationProvider>
-      )}
-    />
+        )}
+      />
+    </LocalizationProvider>
   )
+}
+
+function onSubmit (values, form) {
+  console.log(values)
+  console.log(form)
+  form.reset(0)
 }
 
 export default DestinationForm
