@@ -1,5 +1,6 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects'
 import actions from './actions'
+import { api } from '../API/axios'
 
 import destinationsSlice from './destinationsSlice'
 import hotelsSlice from './hotelsSlice'
@@ -7,23 +8,17 @@ import hotelsSlice from './hotelsSlice'
 import { push } from 'redux-first-history'
 
 function * fetchDestinationsWorker () {
-  const destinations = yield call(() =>
-    fetch('http://localhost:3000/destinations')
-      .then(response => response.json())
-  )
+  const { data } = yield call(api.getDestinations)
 
-  yield put(destinationsSlice.actions.setItems(destinations))
+  yield put(destinationsSlice.actions.setItems(data))
 }
 
 function * fetchHotelsWorker (action) {
-  console.log(action.payload)
+  console.log('input:', action.payload)
 
-  const hotels = yield call(() =>
-    fetch('http://localhost:3000/hotels')
-      .then(response => response.json())
-  )
+  const { data } = yield call(api.getHotels)
 
-  yield put(hotelsSlice.actions.setItems(hotels))
+  yield put(hotelsSlice.actions.setItems(data))
 
   yield put(push('/hotels'))
 }
