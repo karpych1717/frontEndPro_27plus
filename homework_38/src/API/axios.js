@@ -7,8 +7,6 @@ const instance = axios.create({
   }
 })
 
-console.log(process.env.REACT_APP_API_LINK)
-
 const api = Object.freeze({
   getDestinations (params) {
     return instance.get('destinations', { params })
