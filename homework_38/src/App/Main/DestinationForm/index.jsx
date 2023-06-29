@@ -5,8 +5,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import MyButton from './Button'
 import DestinationInput from './DestinationInput'
 import { Grid, TextField } from '@mui/material'
+import actions from '../../../storage/actions'
+import { useDispatch } from 'react-redux'
 
 function DestinationForm () {
+  const dispatch = useDispatch()
+
+  function onSubmit (values, form) {
+    dispatch(actions.fetchHotels(values))
+  }
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Form
@@ -37,13 +45,6 @@ function DestinationForm () {
       />
     </LocalizationProvider>
   )
-}
-
-function onSubmit (values, form) {
-  console.log('submit')
-  console.log(values)
-  console.log(form)
-  console.log('=======')
 }
 
 export default DestinationForm

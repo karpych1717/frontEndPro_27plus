@@ -5,25 +5,30 @@ import destinationsSlice from './destinationsSlice'
 import hotelsSlice from './hotelsSlice'
 
 import rootSaga from './rootSaga'
-import actions from './actions'
 
-const combinedReducer = combineReducers({
-  destinations: destinationsSlice.reducer,
-  hotels: hotelsSlice.reducer
-})
+import { createReduxHistoryContext } from 'redux-first-history'
+import { createBrowserHistory } from 'history'
 
 const sagaMiddleware = createSagaMiddleware()
 
-const store = configureStore({
-  reducer: combinedReducer,
-  middleware: () => [sagaMiddleware]
+const { createReduxHistory, routerMiddleware, routerReducer } =
+  createReduxHistoryContext({
+    history: createBrowserHistory()
+  })
+
+const combinedReducer = combineReducers({
+  destinations: destinationsSlice.reducer,
+  hotels: hotelsSlice.reducer,
+  router: routerReducer
 })
 
+const store = configureStore({
+  reducer: combinedReducer,
+  middleware: () => [sagaMiddleware, routerMiddleware]
+})
+
+const history = createReduxHistory(store)
 sagaMiddleware.run(rootSaga)
 
-store.dispatch(actions.fetchDestinations('uwu'))
-store.dispatch(actions.fetchHotels('hhhhh'))
-
-console.log(store.getState())
-
+export { history }
 export default store

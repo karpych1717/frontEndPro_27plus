@@ -4,6 +4,8 @@ import actions from './actions'
 import destinationsSlice from './destinationsSlice'
 import hotelsSlice from './hotelsSlice'
 
+import { push } from 'redux-first-history'
+
 function * fetchDestinationsWorker () {
   const destinations = yield call(() =>
     fetch('http://localhost:3000/destinations')
@@ -22,6 +24,8 @@ function * fetchHotelsWorker (action) {
   )
 
   yield put(hotelsSlice.actions.setItems(hotels))
+
+  yield put(push('/hotels'))
 }
 
 function * watcher () {
