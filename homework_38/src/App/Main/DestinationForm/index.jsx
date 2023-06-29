@@ -22,19 +22,19 @@ function DestinationForm () {
         render={({ handleSubmit, form }) => (
           <form onSubmit={handleSubmit}>
             <Grid container direction='column' alignItems='center' justifyContent='center'>
-              <Field name='destination' component={DestinationInput} />
+              <Field name='destination' validate={required} component={DestinationInput} />
 
-              <Field name='checkIn'>
+              <Field name='checkIn' validate={required}>
                 {({ input }) => <DatePicker {...input} sx={{ width: 300, margin: '0.1rem' }} />}
               </Field>
-              <Field name='checkOut'>
+              <Field name='checkOut' validate={required}>
                 {({ input }) => <DatePicker {...input} sx={{ width: 300, margin: '0.1rem' }} />}
               </Field>
 
-              <Field name='adults'>
+              <Field name='adults' validate={positive}>
                 {({ input }) => <TextField {...input} sx={{ width: 300, margin: '0.1rem' }} />}
               </Field>
-              <Field name='children'>
+              <Field name='children' validate={nonNegative}>
                 {({ input }) => <TextField {...input} sx={{ width: 300, margin: '0.1rem' }} />}
               </Field>
 
@@ -45,6 +45,20 @@ function DestinationForm () {
       />
     </LocalizationProvider>
   )
+}
+
+function required (value) {
+  return value ? undefined : 'Required'
+}
+function nonNegative (value) {
+  return !isNaN(value) && value >= 0
+    ? undefined
+    : 'Should be greater or equal than 0'
+}
+function positive (value) {
+  return !isNaN(value) && value > 0
+    ? undefined
+    : 'Should be greater than 0'
 }
 
 export default DestinationForm
