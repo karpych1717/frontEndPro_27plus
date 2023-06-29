@@ -1,7 +1,14 @@
-function Button () {
+import { Button } from '@mui/material'
+function MyButton () {
   return (
-    <button type='submit'>Submit</button>
+    <Button
+      type='submit'
+      variant='outlined'
+      sx={{ width: 300, margin: '0.1rem' }}
+    >
+      Submit
+    </Button>
   )
 }
 
-export default Button
+export default MyButton
