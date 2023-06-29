@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import actions from '../../../../storage/actions'
 
-function DestinationInput () {
+function DestinationInput (props) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actions.fetchDestinations())
@@ -14,7 +14,7 @@ function DestinationInput () {
 
   return (
     <Select
-      name='fuck'
+      {...props.input}
       displayEmpty
       defaultValue=''
       sx={{ width: 300, margin: '0.1rem' }}

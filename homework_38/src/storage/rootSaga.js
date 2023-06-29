@@ -4,7 +4,7 @@ import actions from './actions'
 import destinationsSlice from './destinationsSlice'
 import hotelsSlice from './hotelsSlice'
 
-function * fetchDestinationsWorker (action) {
+function * fetchDestinationsWorker () {
   const destinations = yield call(() =>
     fetch('http://localhost:3000/destinations')
       .then(response => response.json())
@@ -13,7 +13,9 @@ function * fetchDestinationsWorker (action) {
   yield put(destinationsSlice.actions.setItems(destinations))
 }
 
-function * fetchHotelsWorker () {
+function * fetchHotelsWorker (action) {
+  console.log(action.payload)
+
   const hotels = yield call(() =>
     fetch('http://localhost:3000/hotels')
       .then(response => response.json())

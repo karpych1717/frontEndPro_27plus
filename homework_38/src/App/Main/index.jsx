@@ -1,8 +1,7 @@
 import DestinationForm from './DestinationForm'
-import TestForm from './TestForm'
 
 function Main () {
-  return <TestForm />
+  return <DestinationForm />
 }
 
 export default Main
